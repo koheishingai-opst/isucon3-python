@@ -323,8 +323,7 @@ def image(image):
         content_type='image/jpeg'
     )
 
-def get_following():
-    user = get_user()
+def get_following(user):
 
     with get_db() as cur:
         cur.execute(
@@ -351,7 +350,7 @@ def follow():
     user = get_user()
     require_user(user)
 
-    return get_following()
+    return get_following(user)
 
 @app.route('/follow', methods=['POST'])
 def follow_post():
@@ -368,7 +367,7 @@ def follow_post():
                 (user['id'], target)
             )
 
-    return get_following()
+    return get_following(user)
 
 @app.route('/unfollow', methods=['POST'])
 def unfollow():
@@ -385,7 +384,7 @@ def unfollow():
                 (user['id'], target)
             )
 
-    return get_following()
+    return get_following(user)
 
 @app.route('/timeline')
 def timeline():
