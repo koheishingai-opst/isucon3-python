@@ -47,7 +47,7 @@ def get_user():
 
     if api_key:
         with get_db() as cur:
-            cur.execute("SELECT * FROM users WHERE api_key = %s", api_key)
+            cur.execute("SELECT * FROM users WHERE api_key = %s LIMIT 1", api_key)
             user = cur.fetchone()
 
     return user
